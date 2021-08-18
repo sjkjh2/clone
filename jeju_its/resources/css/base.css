@@ -1,0 +1,44 @@
+@charset "utf-8";
+
+/* Font */
+@font-face {
+    font-family:'NanumSquare';
+    font-style: normal;
+    font-weight: 400;
+    src: url("../font/NanumSquareR.eot"),
+    url(../font/NanumSquareR.eot?#iefix) format('embedded-opentype'),
+    url(../font/NanumSquareR.woff) format('woff'),
+    url(../font/NanumSquareR.ttf) format('opentype');
+}
+
+@font-face {
+    font-family:'NanumSquare';
+    font-style: normal;
+    font-weight: 600;
+    src: url(../font/NanumSquareB.eot),
+    url(../font/NanumSquareB.eot?#iefix) format('embedded-opentype'),
+    url(../font/NanumSquareB.woff) format('woff'),
+    url(../font/NanumSquareB.ttf) format('opentype');
+}
+
+@font-face {
+    font-family:'NanumSquare';
+    font-style: normal;
+    font-weight: 800;
+    src: url(../font/NanumSquareEB.eot),
+    url(../font/NanumSquareEB.eot?#iefix) format('embedded-opentype'),
+    url(../font/NanumSquareEB.woff) format('woff'),
+    url(../font/NanumSquareEB.ttf) format('opentype');
+}
+
+/* Reset */
+*, *::before, *::after {position:relative; margin:0; padding:0; -webkit-box-sizing:border-box; box-sizing:border-box;}
+html, body {height:100%; font-size:62.5%;}
+h1, h2, h3, h4, h5, h6 {font-weight:800;}
+ul, li {list-style:none;}
+a {text-decoration:none; color:inherit;}
+button {background:none; border:none; -webkit-box-shadow:none; box-shadow:none; cursor:pointer;}
+input {background:none; border:none;}
+select {background:none; border:none; text-align:left; -webkit-appearance:none; -moz-appearance:none; appearance:none;}
+select::-ms-expand {display:none;} /* 화살표 영역 지움 */
+em, i, b, strong {font-style:normal;}

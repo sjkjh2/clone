@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width, viewport-fit=cover">
+  <link rel="stylesheet" href="./common.css">
+  <link rel="stylesheet" href="./contents.css">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/easing/EasePack.min.js"></script>
+  <script type="text/javascript" src="./ui.js"></script>
+</head>
+
+<body>
+  <div id="content_wrap" class="ui prd">
+    <div class="contents ui-contents">
+      <h3>맞춤메뉴</h3>
+      <div class="set-menu-group">
+        <ul class="set-menu-lists">
+          <li class="list-item">
+            <button type="button" class="btn btn-setbox" data-connect="setMenuChkbox1">전체계좌조회</button>
+            <button type="button" class="btn btn-list-delete" aria-label="삭제"></button>
+          </li>
+          <li class="list-item">
+            <button type="button" class="btn btn-setbox" data-connect="setMenuChkbox2">수표조회</button>
+            <button type="button" class="btn btn-list-delete" aria-label="삭제"></button>
+          </li>
+          <li class="list-item">
+            <button type="button" class="btn btn-setbox" data-connect="setMenuChkbox3">장애은행조회</button>
+            <button type="button" class="btn btn-list-delete" aria-label="삭제"></button>
+          </li>
+          <li class="list-item">
+            <button type="button" class="btn btn-setbox" data-connect="setMenuChkbox4">로그인내역</button>
+            <button type="button" class="btn btn-list-delete" aria-label="삭제"></button>
+          </li>
+          <li class="list-item">
+            <button type="button" class="btn btn-setbox" data-connect="setMenuChkbox5">예적금납입</button>
+            <button type="button" class="btn btn-list-delete" aria-label="삭제"></button>
+          </li>
+          <li class="list-item">
+            <button type="button" class="btn btn-setbox" data-connect="setMenuChkbox6">대출금상환</button>
+            <button type="button" class="btn btn-list-delete" aria-label="삭제"></button>
+          </li>
+          <li class="list-item">
+            <button type="button" class="btn btn-setbox" data-connect="setMenuChkbox7">공제료납입</button>
+            <button type="button" class="btn btn-list-delete" aria-label="삭제"></button>
+          </li>
+          <li class="list-item">
+            <button type="button" class="btn btn-setbox" data-connect="setMenuChkbox8">자동이체신청</button>
+            <button type="button" class="btn btn-list-delete" aria-label="삭제"></button>
+          </li>
+          <!-- <li class="list-item">
+            <button type="button" class="btn btn-setbox" data-connect="setMenuChkbox9">전계좌조회</button>
+            <button type="button" class="btn btn-list-delete" aria-label="삭제"></button>
+          </li>
+          <li class="list-item">
+            <button type="button" class="btn btn-setbox" data-connect="setMenuChkbox10">전계좌조회</button>
+            <button type="button" class="btn btn-list-delete" aria-label="삭제"></button>
+          </li> -->
+        </ul>
+      </div>
+      <div class="check-menu-group">
+        <div class="header-group">
+          <h3 class="h3">조회</h3>
+        </div>
+        <ul class="chk-menu-lists type-acnt-search">
+          <li>
+            <label for="setMenuChkbox1" class="rdo-label">
+              <input type="checkbox" name="setMenuChkbox" id="setMenuChkbox1" class="default" value="" checked >
+              <span class="inp-design">전체계좌조회</span>
+            </label>
+          </li>
+          <li>
+            <label for="setMenuChkbox2" class="rdo-label">
+              <input type="checkbox" name="setMenuChkbox" id="setMenuChkbox2" class="default" value="" checked >
+              <span class="inp-design">수표조회</span>
+            </label>
+          </li>
+          <li>
+            <label for="setMenuChkbox3" class="rdo-label">
+              <input type="checkbox" name="setMenuChkbox" id="setMenuChkbox3" class="default" value="" checked >
+              <span class="inp-design">장애은행조회</span>
+            </label>
+          </li>
+          <li>
+            <label for="setMenuChkbox4" class="rdo-label">
+              <input type="checkbox" name="setMenuChkbox" id="setMenuChkbox4" class="default" value="" checked >
+              <span class="inp-design">로그인내역</span>
+            </label>
+          </li>
+        </ul>
+        <div class="header-group">
+          <h3 class="h3">이체</h3>
+        </div>
+        <ul class="chk-menu-lists type-acnt-search">
+          <li>
+            <label for="setMenuChkbox5" class="rdo-label">
+              <input type="checkbox" name="setMenuChkbox" id="setMenuChkbox5" class="default" value="" checked >
+              <span class="inp-design">예적금납입</span>
+            </label>
+            </li>
+          <li>
+            <label for="setMenuChkbox6" class="rdo-label">
+              <input type="checkbox" name="setMenuChkbox" id="setMenuChkbox6" class="default" value="" checked >
+              <span class="inp-design">대출금상환</span>
+            </label>
+            </li>
+          <li>
+            <label for="setMenuChkbox7" class="rdo-label">
+              <input type="checkbox" name="setMenuChkbox" id="setMenuChkbox7" class="default" value="" checked >
+              <span class="inp-design">공제료납입</span>
+            </label>
+            </li>
+          <li>
+            <label for="setMenuChkbox8" class="rdo-label">
+              <input type="checkbox" name="setMenuChkbox" id="setMenuChkbox8" class="default" value="" checked >
+              <span class="inp-design">자동이체신청</span>
+            </label>
+            </li>
+          <li>
+            <label for="setMenuChkbox9" class="rdo-label">
+              <input type="checkbox" name="setMenuChkbox" id="setMenuChkbox9" class="default" value="">
+              <span class="inp-design">자동이체관리</span>
+            </label>
+            </li>
+          <li>
+            <label for="setMenuChkbox10" class="rdo-label">
+              <input type="checkbox" name="setMenuChkbox" id="setMenuChkbox10" class="default" value="">
+              <span class="inp-design">예약이체관리</span>
+            </label>
+            </li>
+        </ul>
+        <script>
+          $('.set-menu-lists').FitMenuView({ type: 'mobile' });
+        </script>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

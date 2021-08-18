@@ -1,0 +1,11 @@
+/* tooltip */
+.tool-header {display:flex; align-items:center;}
+.tool-header .btn-tool {display:block; width:50px; height:50px; margin-left:10px; background:#ddd; border-radius:50%;}
+.tool-body[aria-hidden="false"] {display:block; position:absolute; top:30px; left:0; right:0; width:100%; padding:10px; border-radius:6px; border:1px solid #666; background:#fefefe; box-shadow:0 5px 11px rgba(0,0,0,0.2); z-index:10;}
+.tool-body[aria-hidden="true"] {display:none};
+
+/* 맞춤메뉴 */
+.set-menu-lists {position:relatvie; min-height:80px;}
+.set-menu-lists li.list-item {position:absolute; left:0; top:0; width:25%; height:80px; border:1px solid red; box-sizing:border-box;}
+.set-menu-lists li.list-item .btn-setbox {display:block; width:100%; height:100%; letter-spacing:-1px;}
+.set-menu-lists li.list-item .btn-setbox ~ .btn-list-delete {position:absolute; right:-10px; top:-10px; width:20px; height:20px; border-radius:50%; background:red;}

@@ -1,0 +1,11 @@
+*, *::before, *::after {position:relative; margin:0; padding:0; box-sizing:border-box;}
+ul, ol, li {list-style:none;}
+body {padding:20px;}
+button {border:none; background:none; outline:none; font-size:inherit;}
+
+input:disabled + span, input.default.disabled + span {color:#bbb;}
+
+.ui-blind {position:absolute !important; height:1px; width:1px; overflow:hidden; clip:rect(1px,1px,1px,1px); clip:rect(1px 1px 1px 1px); word-break:initial; word-wrap:initial;}
+
+.btn-close {position:absolute; top:0; right:0;}
+.btn-close::after {content:""; display:block; width:20px; height:20px; background:red; }

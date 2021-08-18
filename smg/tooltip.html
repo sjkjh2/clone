@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width, viewport-fit=cover">
+  <link rel="stylesheet" href="./common.css">
+  <link rel="stylesheet" href="./contents.css">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/easing/EasePack.min.js"></script>
+  <script type="text/javascript" src="./ui.js"></script>
+
+  <title>HTML</title>
+  
+  <!-- HTML -->
+  
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="contents">
+    <div class="tool-group">
+      <div class="tool-header">
+        <label for="depositView" class="ui-label">받는 분 통장 표시</label>
+        <button type="button" class="btn btn-tool" aria-expanded="false" aria-describedby="toolBox"><span class="ui-blind">툴팁버튼</span></button>
+      </div>
+      <div class="tool-body" id="toolBox" role="tool" tabindex="0" aria-hidden="true">
+        <span class="tool-tit">받는 분 통장 표시</span>
+        <ul>
+          <li>한글 10자 이내 입력 가능, 통장은 7자 까지 인자</li>
+          <li>미입력 시 출금 계좌 예금주 표시</li>
+        </ul>
+        <button type="button" class="btn btn-close"><span class="ui-blind">툴팁레이어 닫기</span></button>
+      </div>
+    </div>
+  </div>
+  
+</body>
+</html>
