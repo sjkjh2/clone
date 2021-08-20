@@ -4,14 +4,43 @@ $(document).ready(function(){
 });
 
 var initHandler = function(){
-    gnb();
-    // mainVisual();
+    main();
 	tabMenu();
 	console.log('initHandler');
 }
 
 /* Common */
 var winH = null;
+
+/* Main */
+var main = function(){
+    if($('.main.home').length){
+        mainScroll();
+        gnb();
+        mainVisual();
+    }
+}
+
+/* Main - Scroll */
+var mainScroll = function(){
+    $(window).on({
+        'scroll': function(){
+            var winH = $(window).innerHeight(),
+                scrollTop = $(document).scrollTop();
+            
+            var header = $('.header');
+            var snb = $('.snb');
+
+            if(scrollTop >= winH){
+                header.addClass('active');
+                snb.addClass('active');
+            }else{
+                header.removeClass('active');
+                snb.removeClass('active');
+            }
+        }
+    })
+}
 
 /* Main - Gnb */
 var gnb = function(){
@@ -82,22 +111,26 @@ var gnb = function(){
                 })
             }
         }
-    })
+    });
 }
 
 /* Main - Visual */
 var mainVisual = function(){
-    var winH = $(window).innerHeight();
-    var visualBox = $('.main.home [class*=visual]');
-
-    visualBox.css('height', winH);
-
-    $(window).on({
-        'resize': (function(){
-            visualBox.css('height', winH);
-        })
+    var snb = $('.snb .list .item button');
+    snb.on({
+        'click': function(){
+            var $this = $(this),
+                len = $this.closest('.item').length,
+                idx = $this.closest('.item').index();
+            for(a = 0; a < len; a++){
+                var item = $this.closest('.item'),
+                    visualIdx = item.closest('.snb').siblings('.visual-wrap').find('[class*=visual]').eq(idx),
+                    offset = visualIdx.offset();
+                $('html, body').animate({scrollTop:offset.top}, 300);
+            }
+        }
     })
-    console.log(winH);
+    
 }
 
 /* TabMenu */
@@ -111,6 +144,7 @@ var tabMenu = function(){
                 tabSinblings = tab.closest('.item').siblings().find('.tab'),
                 idx = $this.index(),
                 tabPanelIdx = $this.closest('.tab-list').next('.tab-cont').find('.panel').eq(idx);
+                console.log(idx);
 
             /* AddClass */
             tab.addClass('is-current');
