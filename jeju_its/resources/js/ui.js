@@ -1,23 +1,36 @@
 $(document).ready(function(){
 	initHandler();
-    
 });
 
 var initHandler = function(){
     main();
-	tabMenu();
+    subPage();
 	console.log('initHandler');
 }
 
 /* Common */
-var winH = null;
+var winW = null,
+    winH = null,
+    scrollTop = null;
 
 /* Main */
 var main = function(){
     if($('.main.home').length){
-        mainScroll();
-        gnb();
+        var winW = $(window).innerWidth()
+        if(winW > 1023){
+            gnb();
+        }
         mainVisual();
+        mainScroll();
+        console.log('initMain');
+    }
+}
+
+/* Sub Page */
+var subPage = function(){
+    if($('.main.sub').length){
+        tabMenu();
+        console.log('initSub');
     }
 }
 
@@ -28,10 +41,10 @@ var mainScroll = function(){
             var winH = $(window).innerHeight(),
                 scrollTop = $(document).scrollTop();
             
-            var header = $('.header');
-            var snb = $('.snb');
+            var header = $('.header'),
+                snb = $('.snb');
 
-            if(scrollTop >= winH){
+            if(scrollTop >= winH - (header.innerHeight())){
                 header.addClass('active');
                 snb.addClass('active');
             }else{
@@ -39,7 +52,7 @@ var mainScroll = function(){
                 snb.removeClass('active');
             }
         }
-    })
+    });
 }
 
 /* Main - Gnb */
@@ -49,7 +62,8 @@ var gnb = function(){
         gnbBg = gnbWrap.find('.gnb-bg'),
         gnbHandler = gnbWrap.find('.dep1'),
         gnbFocus = gnbHandler.children('button'),
-        dep2 = gnbWrap.find('.dep2');
+        dep2 = gnbWrap.find('.dep2'),
+        snb = $('.snb');
 
     // gnb에 마우스가 올라가면
     gnbHandler.on({
@@ -70,7 +84,8 @@ var gnb = function(){
             });
             
             if(header.hasClass('active')){
-                $('.main').on({
+                var main = $('.main')
+                main.on({
                     'mouseover': function(){
                         header.removeClass('active');
                         gnbBg.removeClass('is-on');
@@ -82,15 +97,55 @@ var gnb = function(){
         }
     });
 
+    $(window).on({
+        'scroll': function(){
+            var winH = $(window).innerHeight(),
+                scrollTop = $(document).scrollTop(),
+                topOffset = [],
+                visual = $('.visual-wrap').find('[class*=visual]'),
+                snbItem = snb.find('[data-control]');
+
+            if(scrollTop >= winH - (header.innerHeight())){
+                header.addClass('active scroll');
+                gnbFocus.addClass('scroll');
+                snb.addClass('active');
+            }else{
+                header.removeClass('active scroll');
+                gnbFocus.removeClass('scroll');
+                snb.removeClass('active');
+            };
+            
+            $(window).resize(function(){
+                snbItem.removeClass('is-on')
+                topOffset = [];
+                $.each(visual, function(){
+                    topOffset.push($(this).offset().top);
+                });
+            }).trigger('resize');
+
+            visual.each(function(i){
+                var $this = $(this);
+                if((scrollTop >= topOffset[i]) && (scrollTop < topOffset[i] + $this.innerHeight())){
+                    $('html, body').animate({scrollTop:topOffset[i].top}, 300, 'easeInOutQuint');
+                    snbItem.eq(i).addClass('is-on');
+                }else{
+                    $('html, body').animate({scrollTop:topOffset[i].bottom}, 300, 'easeInOutQuint');
+                    snbItem.eq(i).removeClass('is-on');
+                }
+            });
+        }
+    });
+
     // gnb에 포커스가 가면
     gnbFocus.on({
         'focus': function(){
-            var $this = $(this);
+            var $this = $(this),
+                lastMenu = $('.dep1:last-child .dep2 li:last-child a');
+
             header.addClass('active');
             $this.closest('.dep1').addClass('is-on').siblings().removeClass('is-on');
             gnbBg.addClass('is-on');
             dep2.addClass('is-on').attr({'aria-hidden':'false'});
-
 
             dep2.on({
                 'focus': function(){
@@ -101,7 +156,7 @@ var gnb = function(){
             });
 
             if(header.hasClass('active')){
-                $('.dep1:last-child .dep2 li:last-child a').on({
+                lastMenu.on({
                     'blur': function(){
                         header.removeClass('active');
                         gnbBg.removeClass('is-on');
@@ -109,31 +164,53 @@ var gnb = function(){
                         dep2.removeClass('is-on').attr({'aria-hidden':'true'});;
                     }
                 })
-            }
+            };
         }
     });
 }
 
 /* Main - Visual */
 var mainVisual = function(){
-    var snb = $('.snb .list .item button');
-    snb.on({
+    var snbBtn = $('.snb .list .item button');
+    snbBtn.on({
         'click': function(){
             var $this = $(this),
-                len = $this.closest('.item').length,
-                idx = $this.closest('.item').index();
-            for(a = 0; a < len; a++){
-                var item = $this.closest('.item'),
-                    visualIdx = item.closest('.snb').siblings('.visual-wrap').find('[class*=visual]').eq(idx),
-                    offset = visualIdx.offset();
-                $('html, body').animate({scrollTop:offset.top}, 300);
+                item = $this.closest('[data-control]'),
+                idx = $this.closest('[data-control]').index(),
+                visualIdx = item.closest('.snb').siblings('.visual-wrap').find('[data-id]').eq(idx),
+                offset = visualIdx.offset();
+
+            $this.closest('[data-control]').addClass('is-on').siblings().removeClass('is-on');
+            $('html, body').animate({scrollTop:offset.top}, 300, 'easeInOutQuint');
+        },
+        
+        // snb 버튼 엔터를 누르면...
+        'keyup': function(e){
+            var $this = $(this),
+                item = $this.closest('[data-control]'),
+                idx = $this.closest('[data-control]').index(),
+                visualIdx = item.closest('.snb').siblings('.visual-wrap').find('[data-id]').eq(idx),
+                keyCode = e.keyCode;
+
+            if(keyCode == 13){
+                visualIdx.attr('tabindex', '0').focus().siblings().removeAttr('tabindex');
+
+                var lastFocus = $('[data-id]').find('.btn-group:last-child').find('a');
+                lastFocus.on({
+                    'blur': function(){
+                        var $this = $(this),
+                            idx = $this.closest('[data-id]').index(),
+                            snbIdx = $this.closest('.visual-wrap').siblings('.snb').find('[data-control]').eq(idx).find('button');
+            
+                        snbIdx.focus();
+                    }
+                });
             }
         }
-    })
-    
+    });
 }
 
-/* TabMenu */
+/* Sub Page - TabMenu */
 var tabMenu = function(){
     var tabActive = $('.tab-list .item');
 

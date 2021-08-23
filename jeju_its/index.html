@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="./resources/css/base.css">
     <link rel="stylesheet" href="./resources/css/common.css">
     <link rel="stylesheet" href="./resources/css/contents.css">
+    <link rel="stylesheet" href="./resources/css/responsive.css">
 	<script src="./resources/js/vendor/jquery-1.10.2.min.js"></script>
-	<script src="./resources/js/vendor/jquery-ui-1.10.3.custom.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script src="./resources/js/vendor/jquery-ui-1.12.1.min.js"></script>
 	<script src="./resources/js/ui.js"></script>
 </head>
 <body>
@@ -22,14 +22,14 @@
     </div>
 
     <div class="wrap">
-        <header class="header">
+        <header class="header mobile scroll">
             <div class="logo-wrap">
                 <a href="#" class="logo"><span class="offscreen">제주특별자치도 교통정보센터</span></a>
             </div>
             <nav id="gnb" class="gnb-wrap">
                 <span class="gnb-bg"></span>
                 <ul class="gnb">
-                    <li class="dep1"><button type="button"><span>교통정보센터 소개</span></button>
+                    <li class="dep1"><button type="button"><span>교통정보센터 소개</span> <i class="i-select" aria-hidden="true"></i></button>
                         <ul class="dep2" aria-hidden="true">
                             <li><a href="#"><span>센터소개</span></a></li>
                             <li><a href="#"><span>공지사항</span></a></li>
@@ -37,16 +37,16 @@
                             <li><a href="#"><span>사이트맵</span></a></li>
                         </ul>
                     </li>
-                    <li class="dep1"><button type="button"><span>교통 스마트시티</span></button>
+                    <li class="dep1"><button type="button"><span>교통 스마트시티</span> <i class="i-select" aria-hidden="true"></i></button>
                         <ul class="dep2" aria-hidden="true">
                             <li><a href="#"><span>교통정보시스템</span></a></li>
                             <li><a href="#"><span>자율협력주행시스템</span></a></li>
-                            <li><a href="#"><span>긴급차량우선신호</span></a></li>
+                            <li><a href="#"><span>긴급차량우선신호</span></a></li>  
                             <li><a href="#"><span>C-ITS단말 보급현황</span></a></li>
                             <li><a href="#"><span>AR/VR 시스템</span></a></li>
                         </ul>
                     </li>
-                    <li class="dep1"><button type="button"><span>교통정보</span></button>
+                    <li class="dep1"><button type="button"><span>교통정보</span> <i class="i-select" aria-hidden="true"></i></button>
                         <ul class="dep2" aria-hidden="true">
                             <li><a href="#"><span>소통정보</span></a></li>
                             <li><a href="#"><span>CCTV정보</span></a></li>
@@ -60,7 +60,7 @@
                             <li><a href="#"><span>교통-드론현황</span></a></li>
                         </ul>
                     </li>
-                    <li class="dep1"><button type="button"><span>통계 및 분석</span></button>
+                    <li class="dep1"><button type="button"><span>통계 및 분석</span> <i class="i-select" aria-hidden="true"></i></button>
                         <ul class="dep2" aria-hidden="true">
                             <li><a href="#"><span>소통통계</span></a></li>
                             <li><a href="#"><span>도로통계</span></a></li>
@@ -78,15 +78,25 @@
         <main id="main" class="main home" role="main">
             <nav class="snb">
                 <ol class="list">
-                    <li class="item is-on"><button type="button"><span class="txt">01</span><span class="offscreen"> 제주 교통정보센터 섹션 이동하기</span></button></li>
-                    <li class="item"><button type="button"><span class="txt">02</span><span class="offscreen"> 교통 스마트 시티 섹션 이동하기</span></button></li>
-                    <li class="item"><button type="button"><span class="txt">03</span><span class="offscreen"> 자율주행을 선도하는 제주 섹션 이동하기</span></button></li>
-                    <li class="item"><button type="button"><span class="txt">04</span><span class="offscreen"> 차세대교통정보 제공 섹션 이동하기</span></button></li>
-                    <li class="item"><button type="button"><span class="txt">05</span><span class="offscreen"> 긴급차량 우선신호 서비스 섹션 이동하기</span></button></li>
+                    <li data-control="visual01" class="item is-on">
+                        <button type="button"><span class="txt">01</span><span class="offscreen"> 제주 교통정보센터 섹션 이동하기</span></button>
+                    </li>
+                    <li data-control="visual02" class="item">
+                        <button type="button"><span class="txt">02</span><span class="offscreen"> 교통 스마트 시티 섹션 이동하기</span></button>
+                    </li>
+                    <li data-control="visual03" class="item">
+                        <button type="button"><span class="txt">03</span><span class="offscreen"> 자율주행을 선도하는 제주 섹션 이동하기</span></button>
+                    </li>
+                    <li data-control="visual04" class="item">
+                        <button type="button"><span class="txt">04</span><span class="offscreen"> 차세대교통정보 제공 섹션 이동하기</span></button>
+                    </li>
+                    <li data-control="visual05" class="item">
+                        <button type="button"><span class="txt">05</span><span class="offscreen"> 긴급차량 우선신호 서비스 섹션 이동하기</span></button>
+                    </li>
                 </ol>
             </nav>
             <div class="visual-wrap">
-                <section class="visual01">
+                <section data-id="visual01" class="visual01">
                     <div class="inner">
                         <h2><em>JEJU ITS</em> <br><span>제주 교통정보센터</span></h2>
                         <p class="dec">각종 교통정보와 최신시스템을 활용하여 <br>최적의 교통상태를 유지하기 위한 최첨단 관제센터입니다.</p>
@@ -98,7 +108,7 @@
                         </div>
                     </div>
                 </section>
-                <section class="visual02">
+                <section data-id="visual02" class="visual02">
                     <div class="inner">
                         <h2 class="h1">교통 스마트 시티</h2>
                         <p class="dec">도로 교통흐름&#47;정체&#47;공사&#47;사고 등에대한 <br>지도기반 관제시스템을 운영하고 있습니다.</p>
@@ -107,7 +117,7 @@
                         </div>
                     </div>
                 </section>
-                <section class="visual03">
+                <section data-id="visual03" class="visual03">
                     <div class="inner">
                         <h2 class="h1">자율주행을 <br>선도하는 제주</h2>
                         <p class="dec">제주형 자율주행 시범지구운영 및 <br>자율주행차량 상용화 촉진사업을 지원합니다.</p>
@@ -116,7 +126,7 @@
                         </div>
                     </div>
                 </section>
-                <section class="visual04">
+                <section data-id="visual04" class="visual04">
                     <div class="inner">
                         <h2 class="h1">차세대교통정보 제공</h2>
                         <p class="dec">교통드론을 통한 교통위반 단속으로 <br>안전한 교통질서 시스템을 확립하고 있습니다.</p>
@@ -125,7 +135,7 @@
                         </div>
                     </div>
                 </section>
-                <section class="visual05">
+                <section data-id="visual05" class="visual05">
                     <div class="inner">
                         <h2 class="h1">긴급차량 <br>우선신호 서비스</h2>
                         <p class="dec">119구급차량의 신속한 이동을 위한 <br>직진신호 자동변경 시스템을 운영하고 있습니다.</p>
