@@ -200,7 +200,9 @@ var gnb = function(){
                 var $this = $(this);
                 $this.closest('.gnb-wrap').toggleClass('active');
                 $this.siblings('.gnb').attr('aria-hidden', 'false');
-                
+                $('.gnb-bg').click(function(){
+                    $this.closest('.gnb-wrap').removeClass('active');
+                })
                 if($('.gnb-wrap').hasClass('active')){
                     $('body').css('overflow', 'hidden');
                     $this.find('span').text('메뉴 닫기');
