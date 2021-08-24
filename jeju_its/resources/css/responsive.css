@@ -8,16 +8,22 @@
 
 @media screen and (max-width: 1023px) {
 	.header.mobile {height:5.2rem; background:#fff;}
-	.header.mobile .logo-wrap {width:12rem; height:2.5rem;}
-	.header.mobile .gnb-wrap {position:fixed; top:0; right:0; bottom:0; left:0;}
-	.header.mobile .gnb-wrap .gnb-bg {overflow:inherit; top:0; right:0; bottom:0; left:0; visibility:inherit; height:100%; background:rgba(0, 0, 0, 0.5);}
-	.header.mobile .gnb-wrap .gnb {overflow-x:hidden; overflow-y:scroll; position:fixed; top:0; right:0; bottom:0; left:20%; padding:0 2rem; background:#fff; flex-direction:column; flex-wrap:nowrap;}
-	.header.mobile .gnb .dep1 {margin-top:6.4rem; border-top:0.1rem solid #d2e0f1;}
-	.header.mobile .gnb .dep1 + .dep1 {margin-top:0;}
-	.header.mobile .gnb .dep1:last-child {border-bottom:0.1rem solid #d2e0f1;}
-	.header.mobile .gnb .dep1 button {display:flex; width:100%; padding:1.7rem 0; font-size:1.9rem; text-align:left; justify-content:space-between;}
-	.header.mobile .gnb .dep1 button::after {content:inherit;}
-	.header.mobile .gnb .dep1 button .i-select {border-color:#adc5e5;}
-	.header.mobile .gnb .dep2 {overflow:inherit; position:inherit; top:inherit; opacity:1; visibility:inherit; height:100%; border-top:0.1rem solid #d2e0f1; text-align:left;}
-	.header.mobile .gnb .dep2 li a {display:block;}
+	.header.mobile .logo-wrap {left:2rem; width:12rem; height:2.5rem;}
+	.header.mobile .gnb-wrap { margin:0; transition:0.2s all ease-in-out;}
+	.header.mobile .gnb-wrap .gnb-bg {overflow:inherit; opacity:0; top:0; right:0; bottom:0; left:0; visibility:inherit; height:100%; background:rgba(0, 0, 0, 0.5); transition:0.2s all ease-in-out;}
+	.header.mobile .gnb-wrap .gnb {overflow-x:hidden; overflow-y:auto; position:fixed; top:0; right:0; bottom:0; left:20%; padding:0 2rem; background:#fff; flex-direction:column; flex-wrap:nowrap; transform:translateX(100%); transition:0.2s all ease-in-out;}
+	.header.mobile .gnb-wrap .gnb .dep1 {margin-top:6.4rem; border-top:0.1rem solid #d2e0f1;}
+	.header.mobile .gnb-wrap .gnb .dep1 + .dep1 {margin-top:0;}
+	.header.mobile .gnb-wrap .gnb .dep1:last-child {border-bottom:0.1rem solid #d2e0f1;}
+	.header.mobile .gnb-wrap .gnb .dep1 button {display:flex; width:100%; padding:1.7rem 0; font-size:1.9rem; text-align:left; justify-content:space-between;}
+	.header.mobile .gnb-wrap .gnb .dep1 button::after {content:inherit;}
+	.header.mobile .gnb-wrap .gnb .dep1 button .i-select {display:block; border-color:#adc5e5;}
+	.header.mobile .gnb-wrap .gnb .dep2 {overflow:hidden; position:inherit; top:inherit; opacity:1; visibility:hidden; height:0; padding:0; font-size:1.4rem; border-top:0.1rem solid #d2e0f1; text-align:left;}
+	.header.mobile .gnb-wrap .gnb .dep2 li + li {margin:0;}
+	.header.mobile .gnb-wrap .gnb .dep2 li a {display:block; padding-left:1rem;}
+	.header.mobile .gnb-wrap .btn-menu {display:block; position:fixed; top:1.4rem; right:2rem; width:2.5rem; height:2.5rem; background:red;}
+
+	.header.mobile .gnb-wrap.active {position:fixed; top:0; right:0; bottom:0; left:0;}
+	.header.mobile .gnb-wrap.active .gnb-bg {opacity:1;}
+	.header.mobile .gnb-wrap.active .gnb {transform:translateX(0);}
 }

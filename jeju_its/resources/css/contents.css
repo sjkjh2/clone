@@ -19,6 +19,7 @@
 .header .gnb .dep2 li a:hover,
 .header .gnb .dep2 li a:focus {color:#326ebd;}
 .header .gnb .dep2 li a span {display:block;}
+.header .gnb-wrap .btn-menu {display:none;}
 
 /* Header - Active */
 .header .logo-wrap .logo,

@@ -2,10 +2,38 @@ $(document).ready(function(){
 	initHandler();
 });
 
+$(window).onload = function(){
+    $(window).trigger('resize');
+};
+
+var firstRootWinH = 0;
+var rootWinW = 0;
+var rootWinH = 0;
+
 var initHandler = function(){
     main();
+    gnb();
     subPage();
+    resizeInit();
 	console.log('initHandler');
+}
+
+/* Resize */
+var resizeInit = function(){
+    firstRootWinH = $(window).innerHeight();
+    rootWinW = $(window).innerWidth();
+    rootWinH = $(window).innerHeight();
+
+    resizeHandler();
+
+    $(window).on('resize', function(){
+        resizeHandler();
+    });
+
+    function resizeHandler(){
+        rootWinW = $(window).innerWidth();
+        rootWinH = $(window).innerHeight();
+    }
 }
 
 /* Common */
@@ -16,10 +44,6 @@ var winW = null,
 /* Main */
 var main = function(){
     if($('.main.home').length){
-        var winW = $(window).innerWidth()
-        if(winW > 1023){
-            gnb();
-        }
         mainVisual();
         mainScroll();
         console.log('initMain');
@@ -65,108 +89,131 @@ var gnb = function(){
         dep2 = gnbWrap.find('.dep2'),
         snb = $('.snb');
 
-    // gnb에 마우스가 올라가면
-    gnbHandler.on({
-        'mouseover': function(){
-            var $this = $(this);
-            header.addClass('active');
-            $this.addClass('is-on').siblings().removeClass('is-on');
-            gnbBg.addClass('is-on');
-            dep2.addClass('is-on').attr({'aria-hidden':'false'});
-
-            
-            dep2.on({
-                'mouseover': function(){
-                    var $this = $(this);
-                    var dep1 = $this.closest('.dep1');
-                    dep1.addClass('is-on').siblings().removeClass('is-on');
-                }
-            });
-            
-            if(header.hasClass('active')){
-                var main = $('.main')
-                main.on({
-                    'mouseover': function(){
-                        header.removeClass('active');
-                        gnbBg.removeClass('is-on');
-                        gnbHandler.removeClass('is-on');
-                        dep2.removeClass('is-on').attr({'aria-hidden':'true'});;
-                    }
-                })
-            }
-        }
-    });
-
-    $(window).on({
-        'scroll': function(){
-            var winH = $(window).innerHeight(),
-                scrollTop = $(document).scrollTop(),
-                topOffset = [],
-                visual = $('.visual-wrap').find('[class*=visual]'),
-                snbItem = snb.find('[data-control]');
-
-            if(scrollTop >= winH - (header.innerHeight())){
-                header.addClass('active scroll');
-                gnbFocus.addClass('scroll');
-                snb.addClass('active');
-            }else{
-                header.removeClass('active scroll');
-                gnbFocus.removeClass('scroll');
-                snb.removeClass('active');
-            };
-            
-            $(window).resize(function(){
-                snbItem.removeClass('is-on')
-                topOffset = [];
-                $.each(visual, function(){
-                    topOffset.push($(this).offset().top);
-                });
-            }).trigger('resize');
-
-            visual.each(function(i){
+    var winW = $(window).innerWidth();
+    if(winW >= 1203){
+        // gnb에 마우스가 올라가면
+        gnbHandler.on({
+            'mouseover': function(){
                 var $this = $(this);
-                if((scrollTop >= topOffset[i]) && (scrollTop < topOffset[i] + $this.innerHeight())){
-                    $('html, body').animate({scrollTop:topOffset[i].top}, 300, 'easeInOutQuint');
-                    snbItem.eq(i).addClass('is-on');
-                }else{
-                    $('html, body').animate({scrollTop:topOffset[i].bottom}, 300, 'easeInOutQuint');
-                    snbItem.eq(i).removeClass('is-on');
-                }
-            });
-        }
-    });
-
-    // gnb에 포커스가 가면
-    gnbFocus.on({
-        'focus': function(){
-            var $this = $(this),
-                lastMenu = $('.dep1:last-child .dep2 li:last-child a');
-
-            header.addClass('active');
-            $this.closest('.dep1').addClass('is-on').siblings().removeClass('is-on');
-            gnbBg.addClass('is-on');
-            dep2.addClass('is-on').attr({'aria-hidden':'false'});
-
-            dep2.on({
-                'focus': function(){
-                    var $this = $(this);
-                    var dep1 = $this.closest('.dep1');
-                    dep1.addClass('is-on').siblings().removeClass('is-on');
-                }
-            });
-
-            if(header.hasClass('active')){
-                lastMenu.on({
-                    'blur': function(){
-                        header.removeClass('active');
-                        gnbBg.removeClass('is-on');
-                        gnbHandler.removeClass('is-on');
-                        dep2.removeClass('is-on').attr({'aria-hidden':'true'});;
+                header.addClass('active');
+                $this.addClass('is-on').siblings().removeClass('is-on');
+                gnbBg.addClass('is-on');
+                dep2.addClass('is-on').attr({'aria-hidden':'false'});
+    
+                
+                dep2.on({
+                    'mouseover': function(){
+                        var $this = $(this);
+                        var dep1 = $this.closest('.dep1');
+                        dep1.addClass('is-on').siblings().removeClass('is-on');
                     }
-                })
-            };
-        }
-    });
+                });
+                
+                if(header.hasClass('active')){
+                    var main = $('.main')
+                    main.on({
+                        'mouseover': function(){
+                            header.removeClass('active');
+                            gnbBg.removeClass('is-on');
+                            gnbHandler.removeClass('is-on');
+                            dep2.removeClass('is-on').attr({'aria-hidden':'true'});;
+                        }
+                    })
+                }
+            }
+        });
+    
+        $(window).on({
+            'scroll': function(){
+                var winH = $(window).innerHeight(),
+                    scrollTop = $(document).scrollTop(),
+                    topOffset = [],
+                    visual = $('.visual-wrap').find('[class*=visual]'),
+                    snbItem = snb.find('[data-control]');
+    
+                if(scrollTop >= winH - (header.innerHeight())){
+                    header.addClass('active scroll');
+                    gnbFocus.addClass('scroll');
+                    snb.addClass('active');
+                }else{
+                    header.removeClass('active scroll');
+                    gnbFocus.removeClass('scroll');
+                    snb.removeClass('active');
+                };
+                
+                $(window).resize(function(){
+                    snbItem.removeClass('is-on')
+                    topOffset = [];
+                    $.each(visual, function(){
+                        topOffset.push($(this).offset().top);
+                    });
+                }).trigger('resize');
+    
+                visual.each(function(i){
+                    var $this = $(this);
+                    if((scrollTop >= topOffset[i]) && (scrollTop < topOffset[i] + $this.innerHeight())){
+                        $('html, body').animate({scrollTop:topOffset[i].top}, 300, 'easeInOutQuint');
+                        snbItem.eq(i).addClass('is-on');
+                    }else{
+                        $('html, body').animate({scrollTop:topOffset[i].bottom}, 300, 'easeInOutQuint');
+                        snbItem.eq(i).removeClass('is-on');
+                    }
+                });
+            }
+        });
+
+        // gnb에 포커스가 가면
+        gnbFocus.on({
+            'focus': function(){
+                var $this = $(this),
+                    lastMenu = $('.dep1:last-child .dep2 li:last-child a');
+
+                header.addClass('active');
+                $this.closest('.dep1').addClass('is-on').siblings().removeClass('is-on');
+                gnbBg.addClass('is-on');
+                dep2.addClass('is-on').attr({'aria-hidden':'false'});
+
+                dep2.on({
+                    'focus': function(){
+                        var $this = $(this);
+                        var dep1 = $this.closest('.dep1');
+                        dep1.addClass('is-on').siblings().removeClass('is-on');
+                    }
+                });
+
+                if(header.hasClass('active')){
+                    lastMenu.on({
+                        'blur': function(){
+                            header.removeClass('active');
+                            gnbBg.removeClass('is-on');
+                            gnbHandler.removeClass('is-on');
+                            dep2.removeClass('is-on').attr({'aria-hidden':'true'});;
+                        }
+                    })
+                };
+            }
+        });
+    }else{
+        var menuOpenBtn = $('.gnb-wrap').find('.btn-menu');
+        menuOpenBtn.on({
+            'click': function(){
+                var $this = $(this);
+                $this.closest('.gnb-wrap').toggleClass('active');
+                $this.siblings('.gnb').attr('aria-hidden', 'false');
+                
+                if($('.gnb-wrap').hasClass('active')){
+                    $('body').css('overflow', 'hidden');
+                    $this.find('span').text('메뉴 닫기');
+                }else{
+                    $('body').removeAttr('style');
+                    $this.find('span').text('메뉴 열기');
+                }
+            }
+        });
+    }
+
+
+    
 }
 
 /* Main - Visual */
